@@ -10,11 +10,13 @@ var thing = Filtrr2("#img", function() {
 });
 var pickerColor;
 $("#picker").spectrum({
-    color: "#f00"
+    color: "#f00",
+    showInput: true,
+    move: function(color){
+        color.toHexString(); 
+    }
     
 });
-
-$("#picker").spectrum("get");
 
 function applyFilter(){
     console.log("asdfasdfasdfas");
