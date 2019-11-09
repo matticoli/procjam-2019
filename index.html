@@ -1,17 +1,34 @@
+<!DOCTYPE html>
+
 <html>
     <head>
+        <meta charset="utf-8">
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"/></script>
         <script type="text/javascript" src="./filtrr2.min.js"></script>
         <script defer type="text/javascript" src="./main.js"></script>
+        <link rel="stylesheet" href="styles.css">
     </head>
     <body>
-        <img src="matrioshka.png"/>
-        <img id="img" src="matrioshka.png"/>
+        <!-- <img src="./Doll_references/cherry-blossom-doll.png"/> -->
+        <img id="img" src="./Doll_references/cherry-blossom-doll.png"/>
+
+        <button id="filterButton" onclick="help()">Apply Filter!</button>
     </body>
 </html>
 
 <style>
-img {
-    max-height: 50vh;
+body{
+    display: block;
+}
+.img {
+    height: 10%;
+    width: 8%;
+    display:block
+}
+.filterButton{
+    height: 10px;
 }
 </style>
+
+
+
