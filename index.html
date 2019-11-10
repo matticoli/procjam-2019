@@ -11,20 +11,53 @@
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
-        
+            <p>What do you want to customize?</p>
+            <input type="radio" name="option" value="all" id="alloptions"> Randomize All?<br>
+            <input type="radio" name="option" value="face" id="wholeface" > Randomize Whole Face Only? body stays same<br>
+            <input type="radio" name="option" value="body" id="wholebody"> Randomize Body Only? face stays same<br>
+            <input type="radio" name="option" value="custom" id="customRandom"> Custom Random? can choose what to randomize within face and body<br>
+            <input type="radio" name="color" value="color" id="randomColor"> Randomize colors? All colors will be chosen at random<br>
+            <input type="radio" name="color" value="color" id="customColor"> Custom color please!<br>
+
+            <div class="coloroptions">
+                <p>Color pallete: All dolls made will use variations on this</p>
+                <div class="colorpickers">
+                    <input type='text' id="picker1" style="position: relative;" />
+                    <input type='text' id="picker2" style="position: relative;" />
+                    <input type='text' id="picker3" style="position: relative;" />
+                </div>
+            </div>
+            <div class="options">
+                <div class="faceoptions" >
+                    <input type="checkbox" name="head" value="skin"> Skin<br>
+                    <input type="checkbox" name="head" value="eyes"> Eye<br>
+                    <input type="checkbox" name="head" value="hair"> Hair<br>  
+                    <input type="checkbox" name="head" value="cheeks"> Cheeks<br>
+                </div>  
+                <div class="bodyoptions">
+                    <input type="checkbox" name="body" value="flowers"> Design<br>  
+                    <input type="checkbox" name="body" value="base"> BaseColor<br>  
+                    <input type='text' id="picker4" style="position: relative;" />
+                </div>
+            </div>
         <div id="doll">
         <!-- <img src="./Doll_references/cherry-blossom-doll.png"/> -->
         <!-- <img id="img" src="./Doll_references/cherry-blossom-doll.png"/> -->
-            <img id="change" src="./assets/_0001s_0000_flower-face-skin.png" style="position: absolute;"/>
-            <img id="img" src="./assets/_0001s_0003_flower-face-cheeks.png" style="position: absolute;"/>
-            <img id="img" src="./assets/_0001s_0002_flower-face-hair.png" style="position: absolute;"/>
-            <img id="img" src="./assets/_0001s_0001_flower-face-eyes.png" style="position: absolute;"/>
+            <img id="skin" src="./assets/_0001s_0000_flower-face-skin.png" style="position: absolute;"/>
+            <img id="cheeks" src="./assets/_0001s_0003_flower-face-cheeks.png" style="position: absolute;"/>
+            <img id="hair" src="./assets/_0001s_0002_flower-face-hair.png" style="position: absolute;"/>
+            <img id="eyes" src="./assets/_0001s_0001_flower-face-eyes.png" style="position: absolute;"/>
+            <img id="eyes" src="./assets/_0001s_0005_flower-base-jacket.png" style="position: absolute;"/>
+            <img id="eyes" src="./assets/_0001s_0006_flower-base-flowers.png" style="position: absolute;"/>
+            <img id="eyes" src="./assets/_0001s_0007_flower-base.png" style="position: absolute;"/>
+            <!-- <img id="eyes" src="./assets/" style="position: absolute;"/> -->
 
-        <!-- <img id="img" src="./assets/_0001s_0000_flower-face-skin.png" style="position: absolute;"/> -->
+
+        <!-- <img id="img" src="./assets/_0001s_0000_flower-face-skin.png" style="position: absolute;"/> onclick="hideFaceOptions()" -->
         </div>
 
         <button id="filterButton" onclick="applyFilter()" style="position: relative;">Apply Filter!</button>
-        <input type='text' id="picker" style="position: relative;"/>
+        <!-- <input type='text' id="picker" style="position: relative;"/> -->
     </body>
 </html>
 
@@ -40,8 +73,16 @@ body{
 .filterButton{
     height: 10px;
 }
-.doll{
+#doll{
     position:absolute;
+}
+
+.faceoptions{
+    display:none;
+}
+
+.bodyoptions{
+    display: none;
 }
 </style>
 
