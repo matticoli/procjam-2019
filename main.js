@@ -1,14 +1,16 @@
-console.log("Test");              
+
+//set a list variable to contain all th things to be randomized and all things that are custom set
+//build json at end of function once list is made
 
 //define original filter and update
 var thing = Filtrr2("#eyes", function() {  
     console.log("Test2");      
     
-    var dup = this.dup().expose(80);
-    this.layer('overlay', dup).render();
-    //this.saturate(-70).render();
+    //var dup = this.dup().sepia();
+    //this.layer('overlay', dup).render();
+    this.saturate(-100).render();
 });
-var pickerColor;
+
 $("#picker1").spectrum({
     preferredFormat: "rgb",
     showInput: true,
@@ -33,7 +35,6 @@ $("#picker2").spectrum({
     }
     
 });
-
 $("#picker3").spectrum({
     preferredFormat: "rgb",
     showInput: true,
@@ -60,27 +61,19 @@ $("#picker4").spectrum({
 
 function applyFilter(){
     console.log("asdfasdfasdfas");
+    showOptions() ;
+    var r = $("#picker1").spectrum("get")._r;
+    var g = $("#picker1").spectrum("get")._g;
+    var b = $("#picker1").spectrum("get")._b;
 
-    var r = $("#picker").spectrum("get")._r;
-    var g = $("#picker").spectrum("get")._g;
-    var b = $("#picker").spectrum("get")._b;
-
-    // thing.update(function(){
-    //     this.fill(255, 0, 0).render();
-    // });
+     thing.update(function(){
+         this.fill(r, g, b).render();
+     });
     var img = $('<img id="dynamic">'); //Equivalent: $(document.createElement('img'))
     img.attr('src', "./assets/_0001s_0000_flower-face-skin.png");
     img.css('position', 'absolute');
     //img.appendTo('#doll');//console.log(color.toHexString());
-    console.log($("#picker").spectrum("get")._r);
-    console.log($("#picker").spectrum("get")._g);
-    console.log($("#picker").spectrum("get")._b);
-    console.log($("#picker").spectrum("get")._a);
-    
 
-    // $("#picker").spectrum({
-    //     fill: [0, 0, 0]
-    // })
     var checkboxes = $("input:checkbox");
     var toprint = "";
     for(var i = 0; i < checkboxes.length; i++) {
@@ -98,7 +91,7 @@ function applyFilter(){
 $('#wholeface').click(function() {
     console.log("selected face button!");
     if($('#wholeface').is(':checked')) { 
-         showOptions("face");
+         showOptions("none");
          console.log("i am checked");
      } 
  });
@@ -107,7 +100,7 @@ $('#wholeface').click(function() {
  $('#wholebody').click(function() {
     console.log("selected face button!");
     if($('#wholebody').is(':checked')) { 
-         showOptions("body");
+         showOptions("none");
          console.log("body checked");
      } 
  });
@@ -151,33 +144,84 @@ $('#wholeface').click(function() {
  
  
 function showOptions(option){
-        var optionsList; //at the end this will consist of all options that are needed to know to do the generation
+        var optionsList = []; //at the end this will consist of all options that are needed to know to do the generation
+        var swapFace = false;
+        var swapBody = false;
+        var randomColors = false;
+        var customColors = false;
+        var customFace = false;
+        var randomAll = false;
+        
 
         if(option == "face"){
             showFaceOptions(true);
             showBodyOptions(false);
+            swapFace = true;
+            swapBody = false;
+            randomAll = false;
+            customFace = false;
+
         } else if (option == "body") {
             showBodyOptions(true);
             showFaceOptions(false);
+            swapFace = false;
+            swapBody = true;
+            randomAll = false;
+            customFace = false;
+
         } 
         
         if(option == "color"){
             showColorOptions(true);
+            customColors = true;
+            randomColors = false;
         } else if(option == "randomColor"){
             showColorOptions(false);
+            randomColors = true;
+            customColors = false;
         }
 
         if (option == "allcustom"){
             showBodyOptions(true);
             showFaceOptions(true);
             showColorOptions(true);
+            customFace = true;
+            customColors = true;
         }
 
         if (option == "none"){
             showFaceOptions(false);
             showBodyOptions(false);
             showColorOptions(false);
+            randomAll = true;
         }
+
+        if(randomAll){
+            optionsList.push("randomAll");
+            return;
+        }
+        if(customColors && customFace){
+            optionsList.push("customAll");
+            return;
+        }
+
+        if(swapBody){
+            optionsList.push("swapBody");
+        }
+        if(swapFace){
+            optionsList.push("swapFace");
+        }
+        if(customFace){
+            optionsList.push("customFace");
+        }
+        if(customColors){
+            optionsList.push("customColors");
+        }
+        if(randomColors){
+            optionsList.push("randomColors");
+        }
+
+        console.log(optionsList);
 }
 function showFaceOptions(show){
     var list = document.getElementsByClassName("faceoptions");
