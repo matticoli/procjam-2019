@@ -271,8 +271,10 @@ function randomize(){
 
 //swap body parts
 function swapModel(){
-    var headParts = document.getElementsByClassName("dollHead");
-    var bodyParts = document.getElementsByClassName("dollBody");
+    setBody();
+    setHead();
+    var headParts = document.getElementsByClassName("head");
+    var bodyParts = document.getElementsByClassName("body");
 
     //iterate through and remove anything that was there and put in new parts corresponding
     //to currently selected doll
@@ -280,7 +282,7 @@ function swapModel(){
         
         console.log("woooooooooooooooooooo");
         console.log(headParts[i]);
-        headParts[i].style.display = "none";
+        headParts[i].remove();//style.display = "none";
     }
 
     for(var i = 0; i < bodyParts.length; i++){
@@ -307,4 +309,23 @@ function swapModel(){
         el.appendTo('#dollBody');
         
     }
+
+    // headParts = document.getElementsByClassName("dollHead");
+    // bodyParts = document.getElementsByClassName("dollBody");
+
+    // //iterate through and remove anything that was there and put in new parts corresponding
+    // //to currently selected doll
+    // for(var i = 0; i < headParts.length; i++){
+        
+    //     console.log("woooooooooooooooooooo");
+    //     console.log(headParts[i]);
+    //     headParts[i].style.display = "block";
+    // }
+
+    // for(var i = 0; i < bodyParts.length; i++){
+        
+    //     console.log("woooooooooooooooooooo");
+    //     console.log(bodyParts[i]);
+    //     bodyParts[i].style.display = "block";
+    // }
 }
