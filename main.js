@@ -2,14 +2,48 @@
 //set a list variable to contain all th things to be randomized and all things that are custom set
 //build json at end of function once list is made
 
+//globals!
+var optionsList = []; //at the end this will consist of all options that are needed to know to do the generation
+var swapFace = false;
+var swapBody = false;
+var randomColors = false;
+var customColors = false;
+var customFace = false;
+var randomAll = false;
+
+var rgb1 = [];
+var rgb2 = [];
+var rgb3 = [];
+var rgb4 = [];
+var filters = [eyesFilter, cheeksFilter, skinFilter, design1Filter, design2Filter, baseFilter];
+
+//collection of filters on each object
 //define original filter and update
-var thing = Filtrr2("#eyes", function() {  
+var eyesFilter = Filtrr2("#eyes", function() {  
     console.log("Test2");      
-    
-    //var dup = this.dup().sepia();
-    //this.layer('overlay', dup).render();
     this.saturate(-100).render();
 });
+var cheeksFilter = Filtrr2("#cheeks", function() {  
+    console.log("Test2");      
+    this.saturate(-100).render();
+});
+var skinFilter = Filtrr2("#skin", function() {  
+    console.log("Test2");      
+    this.saturate(-100).render();
+});
+var design1Filter = Filtrr2("#jacket", function() {  
+    console.log("Test2");      
+    this.saturate(-100).render();
+});
+var design2Filter = Filtrr2("#design", function() {  
+    console.log("Test2");      
+    this.saturate(-100).render();
+});
+var baseFilter = Filtrr2("#base", function() {  
+    console.log("Test2");      
+    this.saturate(-100).render();
+});
+
 
 $("#picker1").spectrum({
     preferredFormat: "rgb",
@@ -61,14 +95,21 @@ $("#picker4").spectrum({
 
 function applyFilter(){
     console.log("asdfasdfasdfas");
-    showOptions() ;
-    var r = $("#picker1").spectrum("get")._r;
-    var g = $("#picker1").spectrum("get")._g;
-    var b = $("#picker1").spectrum("get")._b;
+    var optionsCopy = optionsList;
+    console.log(optionsList); //returns list of options in effect
+    
+    console.log(optionsList);
+    
+    var r1 = $("#picker1").spectrum("get")._r;
+    var g1 = $("#picker1").spectrum("get")._g;
+    var b1 = $("#picker1").spectrum("get")._b;
 
-     thing.update(function(){
-         this.fill(r, g, b).render();
-     });
+    for(var j = 0; j < filters.length; j++){
+        filters[j].update(function(){
+            this.fill(r1, g1, b1).render();
+        });
+    }
+     
     var img = $('<img id="dynamic">'); //Equivalent: $(document.createElement('img'))
     img.attr('src', "./assets/_0001s_0000_flower-face-skin.png");
     img.css('position', 'absolute');
@@ -81,9 +122,13 @@ function applyFilter(){
             toprint += checkboxes[i].value + " ";
         }
     }
-    console.log(toprint);
+    //console.log(toprint);
     //console.log($("input:checkbox"));
     console.log($("#picker").spectrum("option", "color")); //returns original value only
+    buildRandomJson();
+    optionsList = [];
+
+    
     
 }
 
@@ -91,7 +136,7 @@ function applyFilter(){
 $('#wholeface').click(function() {
     console.log("selected face button!");
     if($('#wholeface').is(':checked')) { 
-         showOptions("none");
+         showOptions("swapFace");
          console.log("i am checked");
      } 
  });
@@ -100,15 +145,15 @@ $('#wholeface').click(function() {
  $('#wholebody').click(function() {
     console.log("selected face button!");
     if($('#wholebody').is(':checked')) { 
-         showOptions("none");
+         showOptions("swapBody");
          console.log("body checked");
      } 
  });
 
  //no options
- $('#alloptions').click(function() {
+ $('#randomAll').click(function() {
     console.log("selected face button!");
-    if($('#alloptions').is(':checked')) { 
+    if($('#randomAll').is(':checked')) { 
          showOptions("none");
          console.log("all random checked");
      } 
@@ -126,14 +171,14 @@ $('#wholeface').click(function() {
  //show custom color options
  $('#customColor').click(function() {
     if($('#customColor').is(':checked')) { 
-         showOptions("colors");
+         showOptions("customColors");
      } 
  });
 
  //show all options
- $('#customRandom').click(function() {
-    if($('#customRandom').is(':checked')) { 
-         showOptions("allcustom");
+ $('#customAll').click(function() {
+    if($('#customAll').is(':checked')) { 
+         showOptions("allCustom");
      } 
  });
 
@@ -142,36 +187,28 @@ $('#wholeface').click(function() {
          console.log("not checked anymore!");
      } */
  
- 
-function showOptions(option){
-        var optionsList = []; //at the end this will consist of all options that are needed to know to do the generation
-        var swapFace = false;
-        var swapBody = false;
-        var randomColors = false;
-        var customColors = false;
-        var customFace = false;
-        var randomAll = false;
-        
+     
 
-        if(option == "face"){
-            showFaceOptions(true);
+function showOptions(option){
+        
+        if(option == "swapFace"){
+            showFaceOptions(false);
             showBodyOptions(false);
             swapFace = true;
             swapBody = false;
             randomAll = false;
             customFace = false;
 
-        } else if (option == "body") {
-            showBodyOptions(true);
+        } else if (option == "swapBody") {
+            showBodyOptions(false);
             showFaceOptions(false);
             swapFace = false;
             swapBody = true;
             randomAll = false;
             customFace = false;
-
         } 
         
-        if(option == "color"){
+        if(option == "customColors"){
             showColorOptions(true);
             customColors = true;
             randomColors = false;
@@ -181,7 +218,7 @@ function showOptions(option){
             customColors = false;
         }
 
-        if (option == "allcustom"){
+        if (option == "allCustom"){
             showBodyOptions(true);
             showFaceOptions(true);
             showColorOptions(true);
@@ -198,10 +235,12 @@ function showOptions(option){
 
         if(randomAll){
             optionsList.push("randomAll");
+            //console.log(optionsList);
             return;
         }
         if(customColors && customFace){
             optionsList.push("customAll");
+            //console.log(optionsList);
             return;
         }
 
@@ -221,7 +260,7 @@ function showOptions(option){
             optionsList.push("randomColors");
         }
 
-        console.log(optionsList);
+        //console.log(optionsList);
 }
 function showFaceOptions(show){
     var list = document.getElementsByClassName("faceoptions");
@@ -259,8 +298,45 @@ function showColorOptions(show){
     }
 }
 
-function buildRandomJson(listOfOptions){
+function buildRandomJson(){
+    var optionsCopy = optionsList;
+    var myjson = "\{";
+    //iterate through options list, see what is checked, and get relevant information from each option
+    for(var i = 0; i < optionsCopy.length; i++){
+        switch(optionsCopy[i]){
+            case "randomAll":
+                myjson += "\"randomAll\":\{\"randomize?\": true\},";
+                break;
+            case "customAll":
+                myjson += ""
+                break;
+            case "randomColors":
+                myjson += "\"randomColors\": \{\"randomize?\": true\},";
+                break;
+            case "swapFace":
+                myjson += "\"swapFace\": \{\"swap?\": true\},";
+                break;
+            case "swapBody":
+                myjson += "\"swapBody\": \{\"swap?\": true\},";
+                break;
+            case "customColors":
+                rgb1.push($("#picker1").spectrum("get")._r, $("#picker1").spectrum("get")._g,$("#picker1").spectrum("get")._b);
+                rgb2.push($("#picker2").spectrum("get")._r, $("#picker2").spectrum("get")._g,$("#picker2").spectrum("get")._b);
+                rgb3.push($("#picker3").spectrum("get")._r, $("#picker3").spectrum("get")._g,$("#picker3").spectrum("get")._b);
+                console.log(rgb1 + "\n" + rgb2 + "\n" + rgb3);
+                myjson += "\"customColors\": [\{\"color1\": \"["
+                + rgb1[0] + ", " + rgb1[1] + ", " + rgb1[2] + "]\",\"color2\": \"["
+                + rgb2[0] + ", " + rgb2[1] + ", " + rgb2[2] + "]\",\"color3\": \"[" 
+                + rgb3[0] + ", " + rgb3[1] + ", " + rgb3[2] + "]\"\}],";
+                break;
+            default:
+                break;
+            
+        }
+    }
+    console.log("this is options copy in json functions");
 
+    console.log(myjson);
 }
 
 //generate json object that describes attributes which person wants to change

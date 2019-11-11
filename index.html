@@ -11,14 +11,16 @@
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
+        <div id="uiStuff">
             <p>What do you want to customize?</p>
-            <input type="radio" name="option" value="all" id="alloptions"> Randomize All?<br>
-            <input type="radio" name="option" value="face" id="wholeface" > Swap Face Only? Body and colors stay same<br>
-            <input type="radio" name="option" value="body" id="wholebody"> Swap Body Only? Face and color stay same<br>
-            <input type="radio" name="option" value="custom" id="customRandom"> Customize All? can choose what to randomize within face and body<br>
-            <input type="radio" name="color" value="color" id="randomColor"> Randomize colors? All colors will be chosen at random<br>
-            <input type="radio" name="color" value="color" id="customColor"> Custom color please!<br>
-
+            <div class="radios">
+                <input type="radio" name="option" value="all" id="randomAll"> Randomize All?<br>
+                <input type="radio" name="option" value="face" id="wholeface" > Swap Face Only? Body and colors stay same<br>
+                <input type="radio" name="option" value="body" id="wholebody"> Swap Body Only? Face and color stay same<br>
+                <input type="radio" name="option" value="custom" id="customAll"> Customize All? can choose what to randomize within face and body<br>
+                <input type="radio" name="color" value="color" id="randomColor"> Randomize colors? All colors will be chosen at random<br>
+                <input type="radio" name="color" value="color" id="customColor"> Custom color please!<br>
+            </div>
             <div class="coloroptions">
                 <p>Color pallete: All dolls made will use variations on this</p>
                 <div class="colorpickers">
@@ -40,6 +42,7 @@
                     <input type='text' id="picker4" style="position: relative;" />
                 </div>
             </div>
+        </div>
         <div id="doll">
         <!-- <img src="./Doll_references/cherry-blossom-doll.png"/> -->
         <!-- <img id="img" src="./Doll_references/cherry-blossom-doll.png"/> -->
@@ -47,9 +50,9 @@
             <img id="cheeks" src="./assets/_0001s_0003_flower-face-cheeks.png" style="position: absolute;"/>
             <img id="hair" src="./assets/_0001s_0002_flower-face-hair.png" style="position: absolute;"/>
             <img id="eyes" src="./assets/_0001s_0001_flower-face-eyes.png" style="position: absolute;"/>
-            <img id="eyes" src="./assets/_0001s_0005_flower-base-jacket.png" style="position: absolute;"/>
-            <img id="eyes" src="./assets/_0001s_0006_flower-base-flowers.png" style="position: absolute;"/>
-            <img id="eyes" src="./assets/_0001s_0007_flower-base.png" style="position: absolute;"/>
+            <img id="jacket" src="./assets/_0001s_0005_flower-base-jacket.png" style="position: absolute;"/>
+            <img id="design" src="./assets/_0001s_0006_flower-base-flowers.png" style="position: absolute;"/>
+            <img id="base" src="./assets/_0001s_0007_flower-base.png" style="position: absolute;"/>
             <!-- <img id="eyes" src="./assets/" style="position: absolute;"/> -->
 
 
@@ -75,6 +78,7 @@ body{
 }
 #doll{
     position:absolute;
+    margin-left: 200px;
 }
 
 .faceoptions{
@@ -84,6 +88,10 @@ body{
 .bodyoptions{
     display: none;
 }
+
+
+
+
 </style>
 
 <script>

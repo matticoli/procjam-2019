@@ -1,6 +1,42 @@
 {
-    "listToRandom":{},
-    "listToCustom":{}
+    "randomAll":{
+        "randomize?": "boolean"
+    }, 
+    "customAll":{ //list of assets to choose from for generation
+        "eyes": "['file1', 'file2', 'file3']",
+        "cheeks": "['file3']",
+        "hair": "['file2', 'file4']",
+        "bodyDesign": "['file1']",
+        "skin": "['file4', 'file2']",
+        "customColors": "['taken from customcolors']"
+    }, //list of things that were customized and their values
+    "randomColors": {
+        "randomize?": "boolean"
+    },
+    "customColors": [
+        {
+        "color1": "['r', 'g', 'b']",
+        "color2": "['r', 'g', 'b']",
+        "color3": "['r', 'g', 'b']"
+        }
+    ],
+    "swapBody": {
+        "swap?": "boolean"
+    },
+    "swapFace": {
+        "swap?": "boolean"
+    },
+    "customFace":{
+
+    } 
+
+    "properties": [
+        {
+          "name": "String",
+          "value": {}
+        }
+      ],
+
 
 
 }
