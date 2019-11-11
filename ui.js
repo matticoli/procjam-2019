@@ -13,8 +13,17 @@ var flowerDollBody = {jacket: "./assets/_0001s_0005_flower-base-jacket.png",
                         design: "./assets/_0001s_0006_flower-base-flowers.png",
                         base: "./assets/_0001s_0007_flower-base.png"};
 
+var penguinDollHead = {beak: "./assets/_0001s_0008_penguin-face-beak.png",
+                        cheeks: "./assets/_0001s_0009_penguin-face-cheeks.png",
+                        eyes: "./assets/_0001s_0010_penguin-face-eyes.png"};
+
+var penguinDollBody = {feet: "./assets/_0001s_0012_penguin-base-feet.png",
+                        base: "./assets/_0001s_0013_penguin-base.png"};
+
 heads["flowerDoll"] = flowerDollHead;
+heads["penguinDoll"] = penguinDollHead;
 bodies["flowerDoll"] = flowerDollBody;
+bodies["penguinDoll"] = penguinDollBody;
 
 var currentHead;
 var currentBody;
@@ -196,75 +205,106 @@ function applyColors(){
 
 //call to randomize all colors
 function randomize(){
+    //setHead();
+    //setBody();
+    //swapModel();
     //generate rgb value between 0-255 rounded
-    var r1;// = Math.floor(Math.random() * (255 - 0) + 0);
-    var g1;// = Math.floor(Math.random() * (255 - 0) + 0);
-    var b1;// = Math.floor(Math.random() * (255 - 0) + 0);
-    var r2;// = Math.floor(Math.random() * (255 - 0) + 0);
-    var g2;// = Math.floor(Math.random() * (255 - 0) + 0);
-    var b2;// = Math.floor(Math.random() * (255 - 0) + 0);
-    filtersHead = [];
-    filtersBody = [];
-    rgbsBody = [];
-    rgbsHead = [];
+     var r1;// = Math.floor(Math.random() * (255 - 0) + 0);
+     var g1;// = Math.floor(Math.random() * (255 - 0) + 0);
+     var b1;// = Math.floor(Math.random() * (255 - 0) + 0);
+     var r2;// = Math.floor(Math.random() * (255 - 0) + 0);
+     var g2;// = Math.floor(Math.random() * (255 - 0) + 0);
+     var b2;// = Math.floor(Math.random() * (255 - 0) + 0);
+     filtersHead = [];
+     filtersBody = [];
+     rgbsBody = [];
+     rgbsHead = [];
 
+     for(var key in heads[currentHead]){
+         r1 = Math.floor(Math.random() * (255 - 150) + 150);
+         g1 = Math.floor(Math.random() * (255 - 150) + 150);
+         b1 = Math.floor(Math.random() * (255 - 150) + 150);
+         var rgb = {r: r1, g: g1, b: b1};
+         rgbsHead.push(rgb);
+         var filter = Filtrr2("#" + key, function() {   
+             var dup = this.dup().fill(r1, g1, b1);   
+             //this.fill(r1, g1, b1).render();
+             this.layer('overlay', dup).render();  
+         });
+
+         filtersHead.push(filter);
+
+     }
+
+     for(var key in bodies[currentBody]){
+         console.log("hmmmmmmmmmmmmmmm" + key);
+
+         r2 = Math.floor(Math.random() * (255 - 0) + 0);
+         g2 = Math.floor(Math.random() * (255 - 0) + 0);
+         b2 = Math.floor(Math.random() * (255 - 0) + 0);
+         var rgb = {r: r2, g: g2, b: b2};
+         rgbsBody.push(rgb);
+         var filter = Filtrr2("#" + key, function() {   
+             var dup = this.dup().fill(r2, g2, b2);   
+             //this.fill(r1, g1, b1).render();
+             this.layer('overlay', dup).render();  
+         });
+
+         filtersBody.push(filter);
+
+     }
+
+     for(var i = filtersBody.length - 1; i > 0; i--){
+         console.log("gullo" + rgbsBody[i].r);
+         filtersBody[i].update(function(){
+             this.fill(rgbsBody[i].r, rgbsBody[i].g, rgbsBody[i].b).render();
+         });
+     }
+
+     for(var i = filtersHead.length - 1; i > -1; i--){
+         console.log("gullo" + rgbsHead[i].r);
+         filtersHead[i].update(function(){
+             this.fill(rgbsHead[i].r, rgbsHead[i].g, rgbsHead[i].b).render();
+         });
+     }
+}
+
+//swap body parts
+function swapModel(){
+    var headParts = document.getElementsByClassName("dollHead");
+    var bodyParts = document.getElementsByClassName("dollBody");
+
+    //iterate through and remove anything that was there and put in new parts corresponding
+    //to currently selected doll
+    for(var i = 0; i < headParts.length; i++){
+        
+        console.log("woooooooooooooooooooo");
+        console.log(headParts[i]);
+        headParts[i].style.display = "none";
+    }
+
+    for(var i = 0; i < bodyParts.length; i++){
+        
+        console.log("woooooooooooooooooooo");
+        console.log(bodyParts[i]);
+        bodyParts[i].style.display = "none";
+    }
+
+    //now replace!
     for(var key in heads[currentHead]){
-        r1 = Math.floor(Math.random() * (255 - 0) + 0);
-        g1 = Math.floor(Math.random() * (255 - 0) + 0);
-        b1 = Math.floor(Math.random() * (255 - 0) + 0);
-        var rgb = {r: r1, g: g1, b: b1};
-        rgbsHead.push(rgb);
-        var filter = Filtrr2("#" + key, function() {   
-            var dup = this.dup().fill(r1, g1, b1);   
-            //this.fill(r1, g1, b1).render();
-            this.layer('overlay', dup).render();  
-        });
-
-        filtersHead.push(filter);
+        var value = heads[currentHead][key];
+        console.log("pqqqqqqqqqqqqqqqqqq" + value);
+        var el = $("<img id=" + key + " src=" + value + " style='position: absolute; display: block'/>");
+        el.appendTo('#dollHead');
+        
 
     }
 
     for(var key in bodies[currentBody]){
-        console.log("hmmmmmmmmmmmmmmm" + key);
-
-        r2 = Math.floor(Math.random() * (255 - 0) + 0);
-        g2 = Math.floor(Math.random() * (255 - 0) + 0);
-        b2 = Math.floor(Math.random() * (255 - 0) + 0);
-        var rgb = {r: r2, g: g2, b: b2};
-        rgbsBody.push(rgb);
-        var filter = Filtrr2("#" + key, function() {   
-            var dup = this.dup().fill(r2, g2, b2);   
-            //this.fill(r1, g1, b1).render();
-            this.layer('overlay', dup).render();  
-        });
-
-        filtersBody.push(filter);
-
-    }
-
-    for(var i = filtersBody.length - 1; i > 0; i--){
-        console.log("gullo" + rgbsBody[i].r);
-        filtersBody[i].update(function(){
-            this.fill(rgbsBody[i].r, rgbsBody[i].g, rgbsBody[i].b).render();
-        });
-    }
-
-    for(var i = filtersHead.length - 1; i > -1; i--){
-        console.log("gullo" + rgbsHead[i].r);
-        filtersHead[i].update(function(){
-            this.fill(rgbsHead[i].r, rgbsHead[i].g, rgbsHead[i].b).render();
-        });
+        var value = bodies[currentBody][key];
+        console.log("pqqqqqqqqqqqqqqqqqq" + value);
+        var el = $("<img id=" + key + " src=" + value + " style='position: absolute; display: block'/>");
+        el.appendTo('#dollBody');
+        
     }
 }
-
-//convert rgb to hex if needed
-function componentToHex(c) {
-    var hex = c.toString(16);
-    return hex.length == 1 ? "0" + hex : hex;
-  }
-  
-  function rgbToHex(r, g, b) {
-    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
-  }
-  
-  //alert(rgbToHex(0, 51, 255)); // #0033f
