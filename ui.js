@@ -10,7 +10,7 @@ var flowerDollHead = {skin: "./assets/_0001s_0000_flower-face-skin.png",
                 face: "./assets/_0001s_0004_flower-face.png"};
 
 var flowerDollBody = {jacket: "./assets/_0001s_0005_flower-base-jacket.png", 
-                        flowers: "./assets/_0001s_0006_flower-base-flowers.png",
+                        design: "./assets/_0001s_0006_flower-base-flowers.png",
                         base: "./assets/_0001s_0007_flower-base.png"};
 
 heads["flowerDoll"] = flowerDollHead;
@@ -126,8 +126,10 @@ window.onload = function() {
 
 //get selected colors from each color picker to apply to picture later
 function applyColors(){
-    var filters = [];
-    var rgbs = [];
+    var filtersHead = [];
+    var filtersBody = [];
+    var rgbsHead = [];
+    var rgbsBody = [];
     
     for(var key in heads[currentHead]){
         console.log("after colors get" + key);
@@ -136,34 +138,123 @@ function applyColors(){
         var g1 = $("#picker" + key).spectrum("get")._g;
         var b1 = $("#picker" + key).spectrum("get")._b;
         var rgb = {r: r1, g: g1, b: b1};
-        rgbs.push(rgb);
+        rgbsHead.push(rgb);
         //console.log(r + " " + g + " " + b);
         var filter = Filtrr2("#" + key, function() {   
-            console.log("key within filter" + key);     
-            this.fill(r1, g1, b1).render();
-                
+            console.log("key within filter" + key);  
+            var dup = this.dup().fill(r1, g1, b1);   
+            //this.fill(r1, g1, b1).render();
+            this.layer('overlay', dup).render();  
         });
 
-        filters.push(filter);
+        filtersHead.push(filter);
         // filter.update(function(){
         //     this.render();
         // });
 
     }
 
-    for(var i = 0; i < filters.length; i++){
-        console.log("gullo" + rgbs[i].r);
-        filters[i].update(function(){
-            this.fill(rgbs[i].r, rgbs[i].g, rgbs[i].b).render();
+    for(var i = filtersHead.length - 1; i > -1; i--){
+        console.log("gullo" + rgbsHead[i].r);
+        filtersHead[i].update(function(){
+            this.fill(rgbsHead[i].r, rgbsHead[i].g, rgbsHead[i].b).render();
         });
     }
 
-    console.log("filters " + filters);
-    console.log("rgbs" + rgbs);
+    //console.log("filters " + filters);
+    //console.log("rgbs" + rgbs);
     for(var key in bodies[currentBody]){
-    
+        console.log("after colors get" + key);
+
+        var r1 = $("#picker" + key).spectrum("get")._r;
+        var g1 = $("#picker" + key).spectrum("get")._g;
+        var b1 = $("#picker" + key).spectrum("get")._b;
+        var rgb = {r: r1, g: g1, b: b1};
+        rgbsBody.push(rgb);
+        //console.log(r + " " + g + " " + b);
+        var filter = Filtrr2("#" + key, function() {   
+            console.log("key within filter" + key);  
+            var dup = this.dup().fill(r1, g1, b1);   
+            //this.fill(r1, g1, b1).render();
+            this.layer('overlay', dup).render();  
+        });
+
+        filtersBody.push(filter);
+        // filter.update(function(){
+        //     this.render();
+        // });
+    }
+
+    for(var i = filtersBody.length - 1; i > 0; i--){
+        console.log("gullo" + rgbsBody[i].r);
+        filtersBody[i].update(function(){
+            this.fill(rgbsBody[i].r, rgbsBody[i].g, rgbsBody[i].b).render();
+        });
     }
     
+}
+
+//call to randomize all colors
+function randomize(){
+    //generate rgb value between 0-255 rounded
+    var r1;// = Math.floor(Math.random() * (255 - 0) + 0);
+    var g1;// = Math.floor(Math.random() * (255 - 0) + 0);
+    var b1;// = Math.floor(Math.random() * (255 - 0) + 0);
+    var r2;// = Math.floor(Math.random() * (255 - 0) + 0);
+    var g2;// = Math.floor(Math.random() * (255 - 0) + 0);
+    var b2;// = Math.floor(Math.random() * (255 - 0) + 0);
+    filtersHead = [];
+    filtersBody = [];
+    rgbsBody = [];
+    rgbsHead = [];
+
+    for(var key in heads[currentHead]){
+        r1 = Math.floor(Math.random() * (255 - 0) + 0);
+        g1 = Math.floor(Math.random() * (255 - 0) + 0);
+        b1 = Math.floor(Math.random() * (255 - 0) + 0);
+        var rgb = {r: r1, g: g1, b: b1};
+        rgbsHead.push(rgb);
+        var filter = Filtrr2("#" + key, function() {   
+            var dup = this.dup().fill(r1, g1, b1);   
+            //this.fill(r1, g1, b1).render();
+            this.layer('overlay', dup).render();  
+        });
+
+        filtersHead.push(filter);
+
+    }
+
+    for(var key in bodies[currentBody]){
+        console.log("hmmmmmmmmmmmmmmm" + key);
+
+        r2 = Math.floor(Math.random() * (255 - 0) + 0);
+        g2 = Math.floor(Math.random() * (255 - 0) + 0);
+        b2 = Math.floor(Math.random() * (255 - 0) + 0);
+        var rgb = {r: r2, g: g2, b: b2};
+        rgbsBody.push(rgb);
+        var filter = Filtrr2("#" + key, function() {   
+            var dup = this.dup().fill(r2, g2, b2);   
+            //this.fill(r1, g1, b1).render();
+            this.layer('overlay', dup).render();  
+        });
+
+        filtersBody.push(filter);
+
+    }
+
+    for(var i = filtersBody.length - 1; i > 0; i--){
+        console.log("gullo" + rgbsBody[i].r);
+        filtersBody[i].update(function(){
+            this.fill(rgbsBody[i].r, rgbsBody[i].g, rgbsBody[i].b).render();
+        });
+    }
+
+    for(var i = filtersHead.length - 1; i > -1; i--){
+        console.log("gullo" + rgbsHead[i].r);
+        filtersHead[i].update(function(){
+            this.fill(rgbsHead[i].r, rgbsHead[i].g, rgbsHead[i].b).render();
+        });
+    }
 }
 
 //convert rgb to hex if needed
