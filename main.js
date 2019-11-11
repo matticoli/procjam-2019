@@ -19,31 +19,83 @@ var filters = [eyesFilter, cheeksFilter, skinFilter, design1Filter, design2Filte
 
 //collection of filters on each object
 //define original filter and update
-var eyesFilter = Filtrr2("#eyes", function() {  
-    console.log("Test2");      
-    this.saturate(-100).render();
-});
-var cheeksFilter = Filtrr2("#cheeks", function() {  
-    console.log("Test2");      
-    this.saturate(-100).render();
-});
-var skinFilter = Filtrr2("#skin", function() {  
-    console.log("Test2");      
-    this.saturate(-100).render();
-});
-var design1Filter = Filtrr2("#jacket", function() {  
-    console.log("Test2");      
-    this.saturate(-100).render();
-});
-var design2Filter = Filtrr2("#design", function() {  
-    console.log("Test2");      
-    this.saturate(-100).render();
-});
-var baseFilter = Filtrr2("#base", function() {  
-    console.log("Test2");      
-    this.saturate(-100).render();
-});
+// var eyesFilter = Filtrr2("#eyes", function() {  
+//     console.log("Test2");      
+//     this.saturate(-100).render();
+// });
+// var cheeksFilter = Filtrr2("#cheeks", function() {  
+//     console.log("Test2");      
+//     this.saturate(-100).render();
+// });
+// var skinFilter = Filtrr2("#skin", function() {  
+//     console.log("Test2");      
+//     this.saturate(-100).render();
+// });
+// var design1Filter = Filtrr2("#jacket", function() {  
+//     console.log("Test2");      
+//     this.saturate(-100).render();
+// });
+// var design2Filter = Filtrr2("#design", function() {  
+//     console.log("Test2");      
+//     this.saturate(-100).render();
+// });
+// var baseFilter = Filtrr2("#base", function() {  
+//     console.log("Test2");      
+//     this.saturate(-100).render();
+// });
 
+function generatePickers(){
+    var count = 0;
+
+    var headPickerCount = 0;
+    var bodyPickerCount = 0;
+    for(var key in heads[currentHead]){
+        var head = heads[currentHead][key];
+        var value = head[key];
+        console.log("this is value wee" + key);
+
+        //add color picker
+        var label = $('<p>Color pallete: ' + key + '</p>');
+        var picker = $('<input type="text" id="picker' + key + '" style="position: relative;" />');
+        console.log("what sos happenong" + headPickerCount);
+        label.appendTo('#colorPickers');
+        picker.appendTo('#colorPickers');
+
+        $("#picker" + key).spectrum({
+            preferredFormat: "rgb",
+            showInput: true,
+            showPalette: true,
+            color: "#3355cc",//"red",
+         
+            move: function(color){
+                //console.log(color);
+            }
+        });
+        headPickerCount++;
+    }
+
+     for(var key in bodies[currentBody]){
+         var body = bodies[currentBody][key];
+         var value = body[key];
+
+         //add color picker
+         var label = $('<p>Color pallete: ' + key + '</p>');
+         var picker = $('<input type="text" id="picker' + key + '" style="position: relative;" />');
+         label.appendTo('#colorPickers');
+         picker.appendTo('#colorPickers');
+
+         $("#picker" + key).spectrum({
+             preferredFormat: "rgb",
+             showInput: true,
+             showPalette: true,
+      
+             move: function(color){
+                 //console.log(color);
+            }
+         });
+         headPickerCount++;
+     }
+}
 
 $("#picker1").spectrum({
     preferredFormat: "rgb",
