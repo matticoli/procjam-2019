@@ -7,59 +7,42 @@
         <script type="text/javascript" src="./filtrr2.min.js"></script>
         <script defer type="text/javascript" src="./main.js"></script>
         <script src='spectrum.js'></script>
+        <script type="text/javascript" src='ui.js'></script>
         <link rel='stylesheet' href='spectrum.css'/>
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
         <div id="uiStuff">
-            <p>What do you want to customize?</p>
-            <div class="radios">
-                <input type="radio" name="option" value="all" id="randomAll"> Randomize All?<br>
-                <input type="radio" name="option" value="face" id="wholeface" > Swap Face Only? Body and colors stay same<br>
-                <input type="radio" name="option" value="body" id="wholebody"> Swap Body Only? Face and color stay same<br>
-                <input type="radio" name="option" value="custom" id="customAll"> Customize All? can choose what to randomize within face and body<br>
-                <input type="radio" name="color" value="color" id="randomColor"> Randomize colors? All colors will be chosen at random<br>
-                <input type="radio" name="color" value="color" id="customColor"> Custom color please!<br>
+            <h1>What do you want to customize?</h1>
+                <h2>Choose head:</h2>
+                <select id="headDropdown" onchange="setHead()"></select> 
+                <h2>Choose body:</h2>
+                <select id="bodyDropdown" style="margin-bottom: 30px" onchange="setBody()"></select> 
             </div>
             <div class="coloroptions">
-                <p>Color pallete: All dolls made will use variations on this</p>
-                <div class="colorpickers">
-                    <input type='text' id="picker1" style="position: relative;" />
-                    <input type='text' id="picker2" style="position: relative;" />
-                    <input type='text' id="picker3" style="position: relative;" />
-                </div>
-            </div>
-            <div class="options">
-                <div class="faceoptions" >
-                    <input type="checkbox" name="head" value="skin"> Skin<br>
-                    <input type="checkbox" name="head" value="eyes"> Eye<br>
-                    <input type="checkbox" name="head" value="hair"> Hair<br>  
-                    <input type="checkbox" name="head" value="cheeks"> Cheeks<br>
-                </div>  
-                <div class="bodyoptions">
-                    <input type="checkbox" name="body" value="flowers"> Design<br>  
-                    <input type="checkbox" name="body" value="base"> BaseColor<br>  
-                    <input type='text' id="picker4" style="position: relative;" />
-                </div>
+                <div id="colorPickers"></div>
             </div>
         </div>
         <div id="doll">
-        <!-- <img src="./Doll_references/cherry-blossom-doll.png"/> -->
-        <!-- <img id="img" src="./Doll_references/cherry-blossom-doll.png"/> -->
-            <img id="skin" src="./assets/_0001s_0000_flower-face-skin.png" style="position: absolute;"/>
-            <img id="cheeks" src="./assets/_0001s_0003_flower-face-cheeks.png" style="position: absolute;"/>
-            <img id="hair" src="./assets/_0001s_0002_flower-face-hair.png" style="position: absolute;"/>
-            <img id="eyes" src="./assets/_0001s_0001_flower-face-eyes.png" style="position: absolute;"/>
-            <img id="jacket" src="./assets/_0001s_0005_flower-base-jacket.png" style="position: absolute;"/>
-            <img id="design" src="./assets/_0001s_0006_flower-base-flowers.png" style="position: absolute;"/>
-            <img id="base" src="./assets/_0001s_0007_flower-base.png" style="position: absolute;"/>
-            <!-- <img id="eyes" src="./assets/" style="position: absolute;"/> -->
+            <div class="dollHead">
+                <img id="skin" src="./assets/_0001s_0000_flower-face-skin.png" style="position: absolute;"/>
+                <img id="cheeks" src="./assets/_0001s_0003_flower-face-cheeks.png" style="position: absolute;"/>
+                <img id="hair" src="./assets/_0001s_0002_flower-face-hair.png" style="position: absolute;"/>
+                <img id="eyes" src="./assets/_0001s_0001_flower-face-eyes.png" style="position: absolute;"/>
+                <img id="face" src="./assets/_0001s_0004_flower-face.png" style="position: absolute;"/>
+
+            </div>
+
+            <div class="dollBody">
+                <img id="jacket" src="./assets/_0001s_0005_flower-base-jacket.png" style="position: absolute;"/>
+                <img id="design" src="./assets/_0001s_0006_flower-base-flowers.png" style="position: absolute;"/>
+                <img id="base" src="./assets/_0001s_0007_flower-base.png" style="position: absolute;"/>
+            </div>
 
 
-        <!-- <img id="img" src="./assets/_0001s_0000_flower-face-skin.png" style="position: absolute;"/> onclick="hideFaceOptions()" -->
         </div>
 
-        <button id="filterButton" onclick="applyFilter()" style="position: relative;">Apply Filter!</button>
+        <button id="filterButton" onclick="applyColors()" style="position: relative;">Apply Filter!</button>
         <!-- <input type='text' id="picker" style="position: relative;"/> -->
     </body>
 </html>

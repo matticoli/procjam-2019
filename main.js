@@ -15,34 +15,34 @@ var rgb1 = [];
 var rgb2 = [];
 var rgb3 = [];
 var rgb4 = [];
-var filters = [eyesFilter, cheeksFilter, skinFilter, design1Filter, design2Filter, baseFilter];
+//var filters = [eyesFilter, cheeksFilter, skinFilter, design1Filter, design2Filter, baseFilter];
 
 //collection of filters on each object
 //define original filter and update
-var eyesFilter = Filtrr2("#eyes", function() {  
-    console.log("Test2");      
-    this.saturate(-100).render();
-});
-var cheeksFilter = Filtrr2("#cheeks", function() {  
-    console.log("Test2");      
-    this.saturate(-100).render();
-});
-var skinFilter = Filtrr2("#skin", function() {  
-    console.log("Test2");      
-    this.saturate(-100).render();
-});
-var design1Filter = Filtrr2("#jacket", function() {  
-    console.log("Test2");      
-    this.saturate(-100).render();
-});
-var design2Filter = Filtrr2("#design", function() {  
-    console.log("Test2");      
-    this.saturate(-100).render();
-});
-var baseFilter = Filtrr2("#base", function() {  
-    console.log("Test2");      
-    this.saturate(-100).render();
-});
+//  var eyesFilter = Filtrr2("#eyes", function() {  
+//      console.log("Test2");      
+//      this.saturate(-100).render();
+//  });
+//  var cheeksFilter = Filtrr2("#cheeks", function() {  
+//      console.log("Test2");      
+//      this.saturate(-100).render();
+//  });
+//  var skinFilter = Filtrr2("#skin", function() {  
+//      console.log("Test2");      
+//      this.saturate(-100).render();
+//  });
+//  var design1Filter = Filtrr2("#jacket", function() {  
+//      console.log("Test2");      
+//      this.saturate(-100).render();
+//  });
+//  var design2Filter = Filtrr2("#design", function() {  
+//      console.log("Test2");      
+//      this.saturate(-100).render();
+//  });
+//  var baseFilter = Filtrr2("#base", function() {  
+//      console.log("Test2");      
+//      this.saturate(-100).render();
+//  });
 
 
 $("#picker1").spectrum({
@@ -100,15 +100,17 @@ function applyFilter(){
     
     console.log(optionsList);
     
-    var r1 = $("#picker1").spectrum("get")._r;
-    var g1 = $("#picker1").spectrum("get")._g;
-    var b1 = $("#picker1").spectrum("get")._b;
-
-    for(var j = 0; j < filters.length; j++){
-        filters[j].update(function(){
-            this.fill(r1, g1, b1).render();
-        });
-    }
+    var r1 = $("#pickerjacket").spectrum("get")._r;
+    var g1 = $("#pickerjacket").spectrum("get")._g;
+    var b1 = $("#pickerjacket").spectrum("get")._b;
+    design1Filter.update(function(){
+        this.fill(r1, g1, b1).render();
+    });
+    // for(var j = 0; j < filters.length; j++){
+    //     filters[j].update(function(){
+    //         this.fill(r1, g1, b1).render();
+    //     });
+    // }
      
     var img = $('<img id="dynamic">'); //Equivalent: $(document.createElement('img'))
     img.attr('src', "./assets/_0001s_0000_flower-face-skin.png");
