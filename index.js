@@ -5,7 +5,9 @@ const port = process.env.PORT || 8080;
 
 var allTheImages = {
     "flower-body": ["flower-base.png", "flower-base-jacket.png", "flower-base-flowers.png"],
-    "flower-face": ["flower-face.png","flower-face-skin.png","flower-face-cheeks.png","flower-face-eyes.png", "flower-face-hair.png"]
+    "flower-face": ["flower-face.png","flower-face-skin.png","flower-face-cheeks.png","flower-face-eyes.png", "flower-face-hair.png"],
+    "penguin-body": ["penguin-base.png", "penguin-base-feet.png"],
+    "penguin-face": ["penguin-face.png", "penguin-face-cheeks.png","penguin-face-eyes.png", "penguin-face-beak.png"]
 }
 app.use('/', express.static('.'));
 app.get('/data', (req, res) => {
@@ -15,7 +17,7 @@ app.get('/data', (req, res) => {
         var colors = [Jimp.cssColorToHex(req.query.color1), Jimp.cssColorToHex(req.query.color2), Jimp.cssColorToHex(req.query.color3), Jimp.cssColorToHex(req.query.color4), Jimp.cssColorToHex(req.query.color5)];
         var imgIndex = req.query["index"];
 
-        console.log(colors);
+        console.log(imagePaths);
         var i = 0;
         var x = (err, image) => {
             console.log("Run x w "+image);
@@ -37,7 +39,7 @@ app.get('/data', (req, res) => {
                 .composite(image, 0, 0, undefined, x);
             });
         }
-        Jimp.read("./assets/flower-base.png", x);
+        Jimp.read("./assets/blank.png", x);
     } catch(e) {
         res.send("Error");
     }
