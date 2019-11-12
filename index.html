@@ -13,14 +13,18 @@
     </head>
     <body>
         <div id="uiStuff">
-            <h1>What do you want to customize?</h1>
-                <h2>Choose head:</h2>
-                <select id="headDropdown" onchange="setHead()"></select> 
-                <h2>Choose body:</h2>
-                <select id="bodyDropdown" style="margin-bottom: 30px" onchange="setBody()"></select> 
-            </div>
+            <p>What do you want to customize?</p>
+            <select id="headDropdown"></select>
+            <select id="bodyDropdown"></select>
             <div class="coloroptions">
-                <div id="colorPickers"></div>
+                <p>Color pallete: All dolls made will use variations on this</p>
+                <div id="colorPickers" style="display: block;">
+                    <!-- <input type='text' id="picker1" style="position: relative;" />
+                    <input type='text' id="picker2" style="position: relative;" />
+                    <input type='text' id="picker3" style="position: relative;" />
+                    <input type='text' id="picker4" style="position: relative;" />
+                    <input type='text' id="picker5" style="position: relative;" /> -->
+                </div>
             </div>
         </div>
         <div id="doll">
@@ -38,14 +42,8 @@
                 <img class="body" id="design" src="./assets/_0001s_0006_flower-base-flowers.png" style="position: absolute;"/>
                 <img class="body" id="base" src="./assets/_0001s_0007_flower-base.png" style="position: absolute;"/>
             </div>
-
-
         </div>
-
-        <button id="filterButton" onclick="applyColors()" style="position: relative;">Apply Filter!</button>
-        <button id="randomButton" onclick="randomize()" style="position: relative;">Random!</button>
-        <button id="swapButton" onclick="swapModel()" style="position: relative;">Swap!</button>
-
+        <button id="filterButton" onclick="generate()" style="position: relative;">Generate!</button>
         <!-- <input type='text' id="picker" style="position: relative;"/> -->
     </body>
 </html>
