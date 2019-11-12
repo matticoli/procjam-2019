@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"/></script>
+        <script type="text/javascript" src="./filtrr2.min.js"></script>
+        <script defer type="text/javascript" src="./main.js"></script>
+        <script src='spectrum.js'></script>
+        <script type="text/javascript" src='ui.js'></script>
+        <link rel='stylesheet' href='spectrum.css'/>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <div id="uiStuff">
+            <p>What do you want to customize?</p>
+            <select id="headDropdown"></select>
+            <select id="bodyDropdown"></select>
+            <div class="coloroptions">
+                <p>Color pallete: All dolls made will use variations on this</p>
+                <div id="colorPickers" style="display: block;">
+                    <!-- <input type='text' id="picker1" style="position: relative;" />
+                    <input type='text' id="picker2" style="position: relative;" />
+                    <input type='text' id="picker3" style="position: relative;" />
+                    <input type='text' id="picker4" style="position: relative;" />
+                    <input type='text' id="picker5" style="position: relative;" /> -->
+                </div>
+            </div>
+        </div>
+        <button id="filterButton" onclick="generate()" style="position: relative;">Generate!</button>
+        <div>
+
+            <div class="dollimg" style="height: 300px" id="doll1"></div>
+            <div class="dollimg" style="height: 200px" id="doll2"></div>
+            <div class="dollimg" style="height: 100px" id="doll3"></div>
+        </div>
+        <!-- <input type='text' id="picker" style="position: relative;"/> -->
+    </body>
+</html>
+
+<style>
+body{
+    display: block;
+}
+.img {
+    height: 10%;
+    width: 8%;
+    display:block
+}
+.filterButton{
+    height: 10px;
+}
+#doll{
+    position:absolute;
+    margin-left: 200px;
+}
+
+.dollimg {
+    max-height: 300px;
+    display: inline;
+}
+
+.faceoptions{
+    display:none;
+}
+
+.bodyoptions{
+    display: none;
+}
+
+
+
+</style>
+
+<script>
+
+
+
+</script>
+
+
+

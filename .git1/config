@@ -1,0 +1,25 @@
+[core]
+	repositoryformatversion = 0
+	filemode = false
+	bare = false
+	logallrefupdates = true
+	symlinks = false
+	ignorecase = true
+[remote "origin"]
+	url = ssh://git@github.com/matticoli/procjam-2019
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
+[branch "fix"]
+	remote = origin
+	merge = refs/heads/fix
+[remote "heroku"]
+	url = https://git.heroku.com/russian-doll-generator.git
+	fetch = +refs/heads/*:refs/remotes/heroku/*
+[branch "server"]
+	remote = origin
+	merge = refs/heads/server
+[branch "app"]
+	remote = origin
+	merge = refs/heads/app
