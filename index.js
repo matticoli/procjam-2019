@@ -1,22 +1,28 @@
 var Jimp = require('jimp');
 var express = require('express');
-const app = express()
-const port = 80
+const app = express();
+const port = 3000;
+
+var allTheImages = {
+    "flower-base": ["flower-base.png", "flower-base-jacket.png", "flower-base-flowers.png"],
+    "flower-face": ["flower-face.png","flower-face-skin.png","flower-face-cheeks.png","flower-face-eyes.png", "flower-face-hair.png"]
+}
 
 app.get('/', (req, res) => {
 
     
     try {
+        console.log(req.query);
+        var imagePaths = allTheImages[req.query["head"]].concat(allTheImages[req.query["body"]]);
+        var colors = [Jimp.cssColorToHex(req.query.color1), Jimp.cssColorToHex(req.query.color2), Jimp.cssColorToHex(req.query.color3), Jimp.cssColorToHex(req.query.color4), Jimp.cssColorToHex(req.query.color5)];
+        
 
-        var imagePaths = ["flower-base.png", "flower-face.png","flower-face-skin.png","flower-face-cheeks.png","flower-face-eyes.png", "flower-face-hair.png", "flower-base-jacket.png", "flower-base-flowers.png"]
+        console.log(colors);
         var i = 0;
         var x = (err, image) => {
             console.log("Run x w "+image);
             if(i >= imagePaths.length) {
-                image
-                .composite(image.scale(0.8, 0.8), image.bitmap.width * 1.0, 0)
-                // .composite(image.scale(0.6, 0.6), image.bitmap.width * 2, 0)
-                // .composite(image.scale(0.4, 0.4), image.bitmap.width * 3, 0)
+                image.blur(1)
                 .getBase64(Jimp.AUTO, (err, dat) => {
                     res.send("<img src=\""+dat+"\"/>");
                     return;
@@ -28,7 +34,7 @@ app.get('/', (req, res) => {
                 }
                 img
                 .color([
-                    { apply: 'hue', params: [Math.random() * -180] }
+                    { apply: 'tint', params: [colors[Math.floor(Math.random()*colors.length)]] }
                 ])
                 .composite(image, 0, 0, undefined, x);
             });
