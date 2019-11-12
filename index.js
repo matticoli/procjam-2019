@@ -1,7 +1,7 @@
 var Jimp = require('jimp');
 var express = require('express');
 const app = express();
-const port = 80;
+const port = process.env.PORT || 8080;
 
 var allTheImages = {
     "flower-body": ["flower-base.png", "flower-base-jacket.png", "flower-base-flowers.png"],
