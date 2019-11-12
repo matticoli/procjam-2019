@@ -126,7 +126,7 @@ function createUrl(){
         newPallete.push(split[1]);
     }
     console.log(newPallete);
-    console.log("http://localhost:3000/data?head=" + face + "&body=" + body + "&color1=" + 
+    console.log("https://russian-doll-generator.herokuapp.com/data?head=" + face + "&body=" + body + "&color1=" + 
         newPallete[0] + "&color2=" + newPallete[1] + "&color3=" + newPallete[2]
         + "&color4=" + newPallete[3] + "&color5=" + newPallete[4]);
 
@@ -134,7 +134,7 @@ function createUrl(){
     [1, 2, 3].forEach( (i) => {
 
         
-        $.get( "http://localhost:3000/data?head=" + face + "&body=" + body + "&color1=" + 
+        $.get( "https://russian-doll-generator.herokuapp.com/data?head=" + face + "&body=" + body + "&color1=" + 
         newPallete[0] + "&color2=" + newPallete[1] + "&color3=" + newPallete[2]
         + "&color4=" + newPallete[3] + "&color5=" + newPallete[4] + "&index=" + i, function(data) {
             console.log(data);
