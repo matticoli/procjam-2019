@@ -9,4 +9,4 @@ external sources used:
 	JIMP - https://www.npmjs.com/package/jimp
 		JS image processor using npm
 
-Link to itch.io: 
+Link to itch.io: https://dkumykova.itch.io/procjam-2019
