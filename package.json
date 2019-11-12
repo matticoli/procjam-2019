@@ -1,0 +1,28 @@
+{
+  "name": "procjam-2019",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "jimp": "^0.8.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/matticoli/procjam-2019.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/matticoli/procjam-2019/issues"
+  },
+  "homepage": "https://github.com/matticoli/procjam-2019#readme"
+}
