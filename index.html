@@ -27,23 +27,13 @@
                 </div>
             </div>
         </div>
-        <div id="doll">
-            <div class="dollHead">
-                <img class="head" id="skin" src="./assets/_0001s_0000_flower-face-skin.png" style="position: absolute;"/>
-                <img class="head" id="cheeks" src="./assets/_0001s_0003_flower-face-cheeks.png" style="position: absolute;"/>
-                <img class="head" id="hair" src="./assets/_0001s_0002_flower-face-hair.png" style="position: absolute;"/>
-                <img class="head" id="eyes" src="./assets/_0001s_0001_flower-face-eyes.png" style="position: absolute;"/>
-                <img class="head" id="face" src="./assets/_0001s_0004_flower-face.png" style="position: absolute;"/>
-
-            </div>
-
-            <div class="dollBody">
-                <img class="body" id="jacket" src="./assets/_0001s_0005_flower-base-jacket.png" style="position: absolute;"/>
-                <img class="body" id="design" src="./assets/_0001s_0006_flower-base-flowers.png" style="position: absolute;"/>
-                <img class="body" id="base" src="./assets/_0001s_0007_flower-base.png" style="position: absolute;"/>
-            </div>
-        </div>
         <button id="filterButton" onclick="generate()" style="position: relative;">Generate!</button>
+        <div>
+
+            <div class="dollimg" style="height: 300px" id="doll1"></div>
+            <div class="dollimg" style="height: 200px" id="doll2"></div>
+            <div class="dollimg" style="height: 100px" id="doll3"></div>
+        </div>
         <!-- <input type='text' id="picker" style="position: relative;"/> -->
     </body>
 </html>
@@ -65,6 +55,11 @@ body{
     margin-left: 200px;
 }
 
+.dollimg {
+    max-height: 300px;
+    display: inline;
+}
+
 .faceoptions{
     display:none;
 }
@@ -72,7 +67,6 @@ body{
 .bodyoptions{
     display: none;
 }
-
 
 
 

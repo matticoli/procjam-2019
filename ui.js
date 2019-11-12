@@ -94,7 +94,7 @@ function generate(){
     setBody();
     //get color pallete, body and head and call npm function that creates the doll set
     var pallete = document.getElementsByClassName("pallete");
-
+    colorPallete = [];
     for (var i = 0; i < pallete.length; i++){
         var value = $("#picker" + i).spectrum("get");
         console.log("hex values" + $("#picker" + i).spectrum("get"));
@@ -126,20 +126,25 @@ function createUrl(){
         newPallete.push(split[1]);
     }
     console.log(newPallete);
-    console.log("http://mikelpc.dyn.wpi.edu:3000/?head=" + face + "&body=" + body + "&color1=" + 
+    console.log("http://localhost:3000/data?head=" + face + "&body=" + body + "&color1=" + 
         newPallete[0] + "&color2=" + newPallete[1] + "&color3=" + newPallete[2]
         + "&color4=" + newPallete[3] + "&color5=" + newPallete[4]);
 
     /**mikelpc.dyn.wpi.edu/?head=flower-face&body=flower-base&color1=ff00ff&color2=00ff00&color3=0000ff*/
-    $.get( "http://mikelpc.dyn.wpi.edu:3000/?head=" + face + "&body=" + body + "&color1=" + 
-                newPallete[0] + "&color2=" + newPallete[1] + "&color3=" + newPallete[2]
-                + "&color4=" + newPallete[3] + "&color5=" + newPallete[4], function(data) {
-        $(".doll").html(data);
-        console.log("http://mikelpc.dyn.wpi.edu/?head=" + face + "&body=" + body + "&color1=" + 
-        colorPallete[0] + "&color2=" + colorPallete[1] + "&color3=" + colorPallete[2]
-        + "&color4=" + colorPallete[3] + "&color5=" + colorPallete[4]);
-        //alert( "Load was performed." );
-      });
+    [1, 2, 3].forEach( (i) => {
+
+        
+        $.get( "http://localhost:3000/data?head=" + face + "&body=" + body + "&color1=" + 
+        newPallete[0] + "&color2=" + newPallete[1] + "&color3=" + newPallete[2]
+        + "&color4=" + newPallete[3] + "&color5=" + newPallete[4] + "&index=" + i, function(data) {
+            console.log(data);
+            var selector = "#doll"+i;
+            console.log(selector);
+            $(selector).html(data);
+            //alert( "Load was performed." );
+        });
+        $("#doll1").children().height(100);
+    })
     //document.write(data);
 }
 

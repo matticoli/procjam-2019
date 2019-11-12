@@ -4,18 +4,16 @@ const app = express();
 const port = 3000;
 
 var allTheImages = {
-    "flower-base": ["flower-base.png", "flower-base-jacket.png", "flower-base-flowers.png"],
+    "flower-body": ["flower-base.png", "flower-base-jacket.png", "flower-base-flowers.png"],
     "flower-face": ["flower-face.png","flower-face-skin.png","flower-face-cheeks.png","flower-face-eyes.png", "flower-face-hair.png"]
 }
-
-app.get('/', (req, res) => {
-
-    
+app.use('/', express.static('.'));
+app.get('/data', (req, res) => {
     try {
         console.log(req.query);
         var imagePaths = allTheImages[req.query["head"]].concat(allTheImages[req.query["body"]]);
         var colors = [Jimp.cssColorToHex(req.query.color1), Jimp.cssColorToHex(req.query.color2), Jimp.cssColorToHex(req.query.color3), Jimp.cssColorToHex(req.query.color4), Jimp.cssColorToHex(req.query.color5)];
-        
+        var imgIndex = req.query["index"];
 
         console.log(colors);
         var i = 0;
@@ -24,7 +22,7 @@ app.get('/', (req, res) => {
             if(i >= imagePaths.length) {
                 image.blur(1)
                 .getBase64(Jimp.AUTO, (err, dat) => {
-                    res.send("<img src=\""+dat+"\"/>");
+                    res.send("<img style=\"height: " + 100*(parseInt(imgIndex) || 1) + "px\" src=\""+dat+"\"/>");
                     return;
                 });
             }
