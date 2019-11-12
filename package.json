@@ -1,8 +1,12 @@
+ls
 {
   "name": "gen",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
   "dependencies": {
     "jimp": "^0.8.5"
   },
@@ -13,6 +17,6 @@
   "engines": {
     "node": "10.6.0"
   },
-  "author": "",
+  "author": "Mikel Matticoli, Diana Kumykova",
   "license": "ISC"
 }
