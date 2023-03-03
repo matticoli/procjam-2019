@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "express": "^4.17.1",
-    "jimp": "^0.8.5"
+    "jimp": "^0.22.7"
   },
   "devDependencies": {},
   "scripts": {
